@@ -4,7 +4,6 @@ set -xeuo pipefail
 MICROSCANNER_TOKEN="${MICROSCANNER_TOKEN:-}"
 MICROSCANNER_OPTIONS="${MICROSCANNER_OPTIONS:-}"
 DOCKER_IMAGE="${1:-}"
-TEMP_IMAGE_TAG=$(LC_CTYPE=C tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w 32 | head -n 1 | tr '[:upper:]' '[:lower:]' || true)
 
 main() {
   local MICROSCANNER_BINARY MICROSCANNER_SOURCE
@@ -74,7 +73,7 @@ RUN [ -x /tmp/microscanner ] || chmod +x /tmp/microscanner \
   && /tmp/microscanner ${MICROSCANNER_OPTIONS} ${MICROSCANNER_TOKEN}
 EOL
 
-  } | docker build --force-rm -t "${TEMP_IMAGE_TAG}" -f - .
+  } | docker build --force-rm -t "microscanner" -f - .
 }
 
 print_usage() {
@@ -82,8 +81,8 @@ print_usage() {
 }
 
 cleanup() {
-  if docker inspect --type=image "${TEMP_IMAGE_TAG}" &>/dev/null; then
-    docker image rm --force "${TEMP_IMAGE_TAG}" || true
+  if docker inspect --type=image "microscanner" &>/dev/null; then
+    docker image rm --force "microscanner" || true
   fi
   rm -rf "${TEMP_DIR}" || true
 }

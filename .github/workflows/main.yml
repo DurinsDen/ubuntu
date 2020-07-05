@@ -18,10 +18,6 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build Container
       run: docker build --no-cache -t durinsden/ubuntu:test .
-    - name: Install and run rng-tools to generate some entropy
-      run: |
-        sudo apt-get install rng-tools
-        sudo rngd -r /dev/urandom
     - name: Run microscanner
       run: ./scan.sh durinsden/ubuntu:test
       env:
