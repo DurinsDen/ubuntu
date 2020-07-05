@@ -8,13 +8,15 @@ This container sets [Yelp's dumb-init](https://github.com/Yelp/dumb-init) as the
 
 ## Extra Packages
 
-The following packages have been added to assist with general troubleshooting:
+The following packages have been added to assist with general troubleshooting.
 
 * wget
 * curl
 * ping
 * dig/nslookup
 * traceroute
+
+Additionally, the packages from buildpack-deps are also added in order to facilitate easier building of dependent images.
 
 ## Build Info
 
