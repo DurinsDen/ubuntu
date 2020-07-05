@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -xeuo pipefail
 
 MICROSCANNER_TOKEN="${MICROSCANNER_TOKEN:-}"
 MICROSCANNER_OPTIONS="${MICROSCANNER_OPTIONS:-}"
