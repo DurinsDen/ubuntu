@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v1.1.0
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: durinsden/ubuntu
-        tags: test
-        always_pull: true
-        push: false
+    - name: Login to DockerHub
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build Container
+      run: docker build --no-cache -t durinsden/ubuntu:test .
+    - name: Pull latest image
+      run: docker pull durinsden/ubuntu:latest
     - name: Push if image changed 
       run: ./docker-push-latest-if-changed.py --source durinsden/ubuntu:test --target durinsden/ubuntu:latest
