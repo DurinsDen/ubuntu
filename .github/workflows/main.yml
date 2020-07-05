@@ -15,5 +15,8 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: durinsden/ubuntu
-        tags: focal,20.04,latest
+        tags: test
         always_pull: true
+        push: false
+    - name: Push if image changed 
+      run: ./docker-push-latest-if-changed.py --source durinsden/ubuntu:test --target durinsden/ubuntu:latest
