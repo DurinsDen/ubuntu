@@ -15,3 +15,9 @@ The following packages have been added to assist with general troubleshooting:
 * ping
 * dig/nslookup
 * traceroute
+
+## Build Info
+
+### Schedule
+
+This container is built every day at Midnight UTC. A new version is pushed only if something changed (Thanks again to [Yelp](https://github.com/Yelp/docker-push-latest-if-changed))

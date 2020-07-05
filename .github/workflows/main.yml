@@ -4,6 +4,8 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  schedule:
+    - cron: "20 8 * * *"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,5 +20,5 @@ jobs:
       run: docker build --no-cache -t durinsden/ubuntu:test .
     - name: Pull latest image
       run: docker pull durinsden/ubuntu:latest
-    - name: Push if image changed 
+    - name: Push only if image changed 
       run: ./docker-push-latest-if-changed.py --source durinsden/ubuntu:test --target durinsden/ubuntu:latest
