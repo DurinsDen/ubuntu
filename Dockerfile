@@ -2,7 +2,7 @@ FROM ubuntu:focal
 
 # Install base packages and update all packages
 RUN apt-get update && \
-    apt-get install dnsutils iputils-ping traceroute curl wget && \
+    apt-get install dnsutils iputils-ping traceroute curl wget -y && \
     DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 
 # Install dumb-init
